@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Реабилитация Саркоидоза</title>
+    
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Анимации -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2563eb;      
+            --secondary: #06b6d4;    
+            --accent: #f43f5e;       
+            --text-main: #0f172a;    
+            --text-light: #475569;
+            --bg-body: #f0f4f8;      
+            
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.6);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ФОН */
+        .ambient-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1; pointer-events: none; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.6; animation: floatOrb 20s infinite ease-in-out; }
+        .orb-1 { width: 600px; height: 600px; background: #bfdbfe; top: -100px; left: -100px; }
+        .orb-2 { width: 500px; height: 500px; background: #cffafe; bottom: -100px; right: -100px; animation-delay: -5s; }
+        @keyframes floatOrb { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(30px, 50px) scale(1.1); } }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 25px; }
+        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; color: var(--text-main); letter-spacing: -0.02em; }
+        
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.5rem; margin-bottom: 15px; }
+        .line-art { width: 80px; height: 6px; background: linear-gradient(90deg, var(--primary), transparent); border-radius: 10px; margin: 0 auto 20px; }
+
+        /* --- Навигация (ИСПРАВЛЕННАЯ) --- */
+        nav {
+            position: fixed; 
+            top: 20px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            width: 95%; 
+            max-width: 1100px; 
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: var(--glass-border); border-radius: 100px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+            z-index: 1000; 
+            display: flex; justify-content: space-between; align-items: center;
+            /* Защита для iPhone (челка) */
+            margin-top: env(safe-area-inset-top);
+        }
+        .logo-box { 
+            padding: 6px 16px; border: 1px dashed #cbd5e1; border-radius: 20px; 
+            color: var(--primary); font-weight: 700; font-size: 0.95rem; white-space: nowrap;
+        }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a.link-item { margin-left: 25px; text-decoration: none; color: var(--text-main); font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+        .nav-links a.link-item:hover { color: var(--primary); }
+        
+        .nav-btn { 
+            background: var(--text-main); color: white !important; padding: 10px 24px; 
+            border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-left: 25px;
+            white-space: nowrap;
+        }
+
+        /* --- HERO --- */
+        .hero { padding: 180px 0 100px; position: relative; }
+        .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; }
+        
+        .hero h1 { 
+            font-size: 3.5rem; line-height: 1.1; margin-bottom: 25px; 
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;
+        }
+        .hero-actions { margin-top: 50px; }
+
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white; border-radius: 50px; text-decoration: none; font-weight: 600;
+            transition: 0.4s; box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3); border: none; cursor: pointer;
+        }
+        .btn-primary:hover { transform: translateY(-4px); }
+
+        /* Анимация легких */
+        .visual-container { position: relative; height: 400px; display: flex; justify-content: center; align-items: center; }
+        .lung-tech {
+            width: 140px; height: 140px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex; justify-content: center; align-items: center;
+            font-size: 3.5rem; color: white; position: relative; z-index: 2;
+            box-shadow: 0 20px 50px rgba(37, 99, 235, 0.4);
+            animation: floatLung 6s ease-in-out infinite;
+        }
+        @keyframes floatLung { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .circle { position: absolute; border-radius: 50%; border: 1px solid var(--secondary); top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0; z-index: 1; }
+        .c1 { width: 140px; height: 140px; animation: pulse-wave 4s infinite 0s; }
+        .c2 { width: 140px; height: 140px; animation: pulse-wave 4s infinite 1.5s; }
+        .c3 { width: 140px; height: 140px; animation: pulse-wave 4s infinite 3s; }
+        @keyframes pulse-wave { 0% { width: 140px; height: 140px; opacity: 0.6; border-width: 2px; } 100% { width: 450px; height: 450px; opacity: 0; border-width: 0px; } }
+        .fa-lungs { animation: breathe-icon 4s ease-in-out infinite; }
+        @keyframes breathe-icon { 0%, 100% { transform: scale(1); opacity: 0.95; } 50% { transform: scale(1.1); opacity: 1; text-shadow: 0 0 30px white; } }
+
+        /* --- Блоки --- */
+        section { padding: 80px 0; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        
+        .glass-card {
+            background: var(--glass-bg); backdrop-filter: blur(12px);
+            border: var(--glass-border); border-radius: 24px; padding: 35px;
+            box-shadow: var(--glass-shadow); transition: all 0.4s ease;
+            position: relative; overflow: hidden; height: 100%; display: flex; flex-direction: column;
+        }
+        .glass-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.95); }
+        
+        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .card-header i { font-size: 1.5rem; }
+        .card-header h3 { margin: 0; font-size: 1.25rem; line-height: 1.3; }
+        .card-icon-box { width: 60px; height: 60px; border-radius: 18px; background: rgba(37, 99, 235, 0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 25px; }
+
+        /* Typography Lists */
+        .badge-info { display: inline-block; background: #eff6ff; color: var(--primary); padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; }
+        .clean-list { padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+        .clean-list li { list-style: none; display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; line-height: 1.5; color: var(--text-light); }
+        .clean-list li i { color: #10b981; margin-top: 4px; flex-shrink: 0; }
+        .clean-list strong { color: var(--text-main); font-weight: 600; }
+
+        /* Статистика */
+        .stat-container { background: white; border-radius: 20px; padding: 40px; border: 1px solid #e2e8f0; }
+        .stat-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-top: 20px; }
+        .stat-box { flex: 1; text-align: left; min-width: 280px; }
+        .stat-bar-group { margin-bottom: 15px; }
+        .stat-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 5px; }
+        .stat-progress { height: 8px; background: #f1f5f9; border-radius: 4px; overflow: hidden; }
+        .stat-fill { height: 100%; }
+
+        /* ЛФК и Видео */
+        .lfk-section { margin: 60px 0; }
+        .lfk-card { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; padding: 50px; border-radius: 25px; text-align: center; box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2); }
+        .lfk-card h3 { color: white; font-size: 2rem; margin-bottom: 20px; font-weight: 700; }
+        .lfk-text-main { font-size: 1.1rem; max-width: 800px; margin: 0 auto 30px; line-height: 1.6; opacity: 0.95; }
+        .lfk-tasks { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
+        .task-item { background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 12px; backdrop-filter: blur(5px); display: flex; align-items: center; gap: 10px; }
+        
+        .psych-wrapper { display: flex; flex-direction: column; gap: 20px; }
+        .psych-card-wide { background: white; border-radius: 20px; padding: 30px; border: 1px solid #e2e8f0; display: flex; align-items: flex-start; gap: 25px; transition: 0.3s; }
+        .psych-card-wide:hover { transform: translateX(10px); border-color: var(--primary); }
+        .psych-icon { width: 60px; height: 60px; background: #ecfeff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--secondary); flex-shrink: 0; }
+        
+        .video-container { width: 100%; background: #000; border-radius: 20px; overflow: hidden; margin-bottom: 20px; display: flex; justify-content: center; align-items: center; max-height: 550px; }
+        video { width: 100%; height: auto; max-height: 550px; object-fit: contain; }
+
+        /* --- АНКЕТА (Fix Table Overflow) --- */
+        .survey-wrapper { background: white; border-radius: 30px; padding: 50px; box-shadow: 0 20px 60px rgba(0,0,0,0.06); max-width: 900px; margin: 0 auto; }
+        fieldset { border: none; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        legend { font-size: 1.3rem; font-weight: 700; color: var(--primary); margin-bottom: 20px; padding-left: 10px; border-left: 4px solid var(--secondary); }
+        
+        .survey-q { margin-bottom: 25px; }
+        .survey-q label.main-label { display: block; font-weight: 600; margin-bottom: 10px; color: var(--text-main); }
+        .radio-group { display: flex; flex-wrap: wrap; gap: 15px; }
+        .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .check-label { display: flex; align-items: center; gap: 8px; font-weight: 400 !important; cursor: pointer; background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid transparent; }
+        .check-label:hover { background: #eff6ff; }
+        .check-label input { accent-color: var(--primary); transform: scale(1.1); }
+        
+        /* Таблица: Контейнер */
+        .table-scroll-container { 
+            width: 100%; 
+            display: block; /* Важно */
+            overflow-x: auto; 
+            -webkit-overflow-scrolling: touch; /* Для iPhone */
+            margin-top: 15px;
+            padding-bottom: 10px; /* Место для скроллбара */
+        }
+        .survey-table { width: 100%; min-width: 600px; border-collapse: collapse; font-size: 0.9rem; }
+        .survey-table th, .survey-table td { border: 1px solid #e2e8f0; padding: 12px; text-align: center; }
+        .survey-table th { background: #f8fafc; color: var(--text-light); }
+        .survey-table td:first-child { text-align: left; font-weight: 600; min-width: 150px; }
+
+        .scrolling-wrapper { display: flex; gap: 25px; overflow-x: auto; padding: 20px 10px; -webkit-overflow-scrolling: touch; }
+        .screen-mock { min-width: 240px; height: 400px; background: white; border-radius: 30px; border: 8px solid #f1f5f9; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #94a3b8; text-align: center; }
+
+        /* --- МОБИЛЬНЫЕ ПРАВКИ (CRITICAL) --- */
+        @media (max-width: 900px) {
+            /* 1. Исправление ПЛАШКИ МЕНЮ */
+            nav { 
+                width: 92%; /* Строго 92% ширины, чтобы не вылезало */
+                top: 15px; 
+                padding: 8px 12px; /* Меньше паддингов */
+                justify-content: space-between;
+                /* Центрирование и фикс */
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .logo-box { 
+                font-size: 0.75rem; /* Шрифт меньше */
+                padding: 5px 10px; 
+                max-width: 140px; /* Ограничиваем ширину лого */
+                overflow: hidden; text-overflow: ellipsis; 
+            }
+            .nav-links a.link-item { display: none; } /* Ссылки прячем */
+            .nav-btn { 
+                margin-left: 5px; /* Меньше отступ */
+                padding: 8px 14px; /* Кнопка компактнее */
+                font-size: 0.75rem;
+            }
+
+            .container { padding: 0 20px; }
+            .hero { padding-top: 140px; }
+            .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 30px; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero-actions { display: flex; justify-content: center; }
+            
+            .visual-container { height: 300px; margin-top: 20px; }
+            .lung-tech { width: 100px; height: 100px; font-size: 2.5rem; }
+            
+            /* Блоки в столбец */
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .glass-card { padding: 25px; }
+            
+            .stat-container { padding: 25px; }
+            .stat-row { flex-direction: column; gap: 30px; }
+            
+            /* 2. Исправление АНКЕТЫ (Чтобы таблица не вылезала) */
+            .survey-wrapper { padding: 25px 15px; width: 100%; overflow: hidden; /* Обрезаем лишнее у контейнера */ }
+            .table-scroll-container { 
+                max-width: 100%; /* Таблица строго по ширине экрана */
+                /* Принудительный скролл */
+                overflow-x: scroll; 
+            }
+            
+            .checkbox-grid { grid-template-columns: 1fr; }
+            .radio-group { flex-direction: column; gap: 8px; }
+            .psych-card-wide { flex-direction: column; text-align: center; align-items: center; padding: 25px; }
+            .lfk-card { padding: 30px 20px; }
+            .lfk-card h3 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <!-- Меню -->
+    <nav>
+        <div class="logo-box">Саркоидоз.Rehab <i class="fa-solid fa-cat"></i></div>
+        <div class="nav-links">
+            <a href="#about" class="link-item">О болезни</a>
+            <a href="#med-rehab" class="link-item">Лечение</a>
+            <a href="#exercises" class="link-item">Упражнения</a>
+            <a href="#survey" class="nav-btn">Анкета</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="container hero-grid">
+            <div data-aos="fade-up">
+                <h1>Дышите свободно,<br><span>живите полной жизнью</span></h1>
+                <p>Применение средств физической реабилитации для восстановления работы органов дыхания при саркоидозе.</p>
+                <div class="hero-actions">
+                    <a href="#exercises" class="btn-primary">Перейти к упражнениям <i class="fa-solid fa-arrow-down"></i></a>
+                </div>
+            </div>
+            <div class="visual-container" data-aos="zoom-in">
+                <div class="circle c1"></div>
+                <div class="circle c2"></div>
+                <div class="circle c3"></div>
+                <div class="lung-tech"><i class="fa-solid fa-lungs"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1. О болезни -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Что важно знать?</h2>
+                <div class="line-art"></div>
+                <p>Этиология, патогенез и клиническая картина.</p>
+            </div>
+            <div class="grid-3">
+                <div class="glass-card" data-aos="fade-up">
+                    <div class="card-icon-box"><i class="fa-solid fa-microscope"></i></div>
+                    <h3>Что это?</h3>
+                    <p style="margin-top: 15px; color: var(--text-light);">Саркоидоз — системное заболевание с образованием гранулем. Чаще всего поражаются легкие и внутригрудные лимфоузлы (ВГЛУ).</p>
+                </div>
+                <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-icon-box"><i class="fa-solid fa-head-side-cough"></i></div>
+                    <h3>Симптомы</h3>
+                    <p style="margin-top: 15px; color: var(--text-light);">Одышка, сухой кашель, дискомфорт в груди, утомляемость. Часто протекает бессимптомно.</p>
+                </div>
+                <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-icon-box"><i class="fa-solid fa-stethoscope"></i></div>
+                    <h3>Диагностика</h3>
+                    <p style="margin-top: 15px; color: var(--text-light);">Рентген/КТ, спирометрия (ФВД), анализы крови. Исключение туберкулеза и других инфекций.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. СТАТИСТИКА -->
+    <section id="statistics">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Статистика заболеваемости</h2>
+                <p>По данным ГБУЗ ГП№66 ДЗМ (2025 год)</p>
+                <div class="line-art"></div>
+            </div>
+            
+            <div class="stat-container" data-aos="zoom-in">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <h3 style="font-size: 3rem; color: var(--primary); margin: 0; line-height: 1;">120</h3>
+                    <p style="text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; color: var(--text-light);">Пациентов на учете</p>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-box">
+                        <h4>Возраст</h4>
+                        <div class="stat-bar-group">
+                            <div class="stat-label"><span>50+ лет</span> <strong>70 чел.</strong></div>
+                            <div class="stat-progress"><div class="stat-fill" style="width: 58%; background: var(--secondary);"></div></div>
+                        </div>
+                        <div class="stat-bar-group">
+                            <div class="stat-label"><span>30-49 лет</span> <strong>47 чел.</strong></div>
+                            <div class="stat-progress"><div class="stat-fill" style="width: 39%; background: #94a3b8;"></div></div>
+                        </div>
+                        <div class="stat-bar-group">
+                            <div class="stat-label"><span>18-29 лет</span> <strong>3 чел.</strong></div>
+                            <div class="stat-progress"><div class="stat-fill" style="width: 3%; background: #cbd5e1;"></div></div>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <h4>Диагноз (МКБ-10)</h4>
+                        <div class="stat-bar-group">
+                            <div class="stat-label"><span>D86.0 (Легкие)</span> <strong>45%</strong></div>
+                            <div class="stat-progress"><div class="stat-fill" style="width: 45%; background: var(--primary);"></div></div>
+                        </div>
+                        <div class="stat-bar-group">
+                            <div class="stat-label"><span>D86.2 (Легкие + ЛУ)</span> <strong>40%</strong></div>
+                            <div class="stat-progress"><div class="stat-fill" style="width: 40%; background: var(--accent);"></div></div>
+                        </div>
+                        <div class="stat-bar-group">
+                            <div class="stat-label"><span>D86.1, D86.8 (Прочие)</span> <strong>15%</strong></div>
+                            <div class="stat-progress"><div class="stat-fill" style="width: 15%; background: #94a3b8;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. ГОСПИТАЛЬНЫЙ ЭТАП -->
+    <section id="med-rehab">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Госпитальный этап</h2>
+                <p>(от 14 до 21 дня)</p>
+                <div class="line-art"></div>
+            </div>
+
+            <div class="grid-2">
+                <div class="glass-card" data-aos="fade-right">
+                    <div class="card-header">
+                        <i class="fa-solid fa-pills" style="color: var(--primary);"></i>
+                        <h3>Медикаментозная терапия</h3>
+                    </div>
+                    <div style="flex-grow: 1;">
+                        <span class="badge-info">Фундаментальный компонент</span>
+                        <ul class="clean-list">
+                            <li><i class="fa-solid fa-check"></i> <span>Глюкокортикостероиды (ГКС)</span></li>
+                            <li><i class="fa-solid fa-check"></i> <span>Цитостатики</span></li>
+                            <li><i class="fa-solid fa-check"></i> <span>Ингаляционная терапия с муколитиками (при наличии бронхита)</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="glass-card" data-aos="fade-left">
+                    <div class="card-header">
+                        <i class="fa-solid fa-bolt" style="color: var(--secondary);"></i>
+                        <h3>Физиотерапия</h3>
+                    </div>
+                    <div style="flex-grow: 1;">
+                        <ul class="clean-list">
+                            <li><i class="fa-solid fa-check"></i> <span><strong>Ультразвук</strong> на грудную клетку (улучшение микроциркуляции).</span></li>
+                            <li><i class="fa-solid fa-check"></i> <span><strong>Электрофорез</strong> (калия йодид, лидаза) — рассасывающее действие.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. ЛФК -->
+    <section class="lfk-section">
+        <div class="container">
+            <div class="lfk-card" data-aos="zoom-in">
+                <h3><i class="fa-solid fa-person-walking"></i> ЛФК и Физическая реабилитация</h3>
+                <p class="lfk-text-main">Задача: повысить толерантность к нагрузке, улучшить функцию внешнего дыхания (ФВД), укрепить мышцы, которые участвуют в процессе дыхания.</p>
+                <div class="lfk-tasks">
+                    <div class="task-item"><i class="fa-solid fa-chart-line"></i> Толерантность</div>
+                    <div class="task-item"><i class="fa-solid fa-lungs"></i> Функция ФВД</div>
+                    <div class="task-item"><i class="fa-solid fa-dumbbell"></i> Мышцы</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. АМБУЛАТОРНЫЙ ЭТАП -->
+    <section id="exercises" style="background: rgba(255,255,255,0.5);">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Амбулаторно-поликлинический этап</h2>
+                <div class="line-art"></div>
+                <p style="max-width: 800px; margin: 0 auto;">Цель: восстановление функциональных показателей или адаптация пациента к новой ситуации.</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="glass-card" data-aos="fade-up">
+                    <div class="video-container"><video controls src="videos/video1.mp4"></video></div>
+                    <h3>1. Диафрагмальное дыхание</h3>
+                    <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-light);">
+                        <strong>ИП:</strong> лёжа на спине, ноги согнуты. Рука на животе.<br>
+                        <strong>Вдох:</strong> живот выпячивается.<br>
+                        <strong>Выдох:</strong> живот втягивается (1:2).<br><br>
+                        <i class="fa-solid fa-circle-info" style="color:var(--primary)"></i> Стимулирует нижние доли легких.
+                    </p>
+                </div>
+                <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="video-container"><video controls src="videos/video2.mp4"></video></div>
+                    <h3>2. С сопротивлением</h3>
+                    <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-light);">
+                        Выдох через губы трубочкой или коктейльную трубочку в воду.<br><br>
+                        <i class="fa-solid fa-circle-info" style="color:var(--primary)"></i> Предотвращает коллапс мелких бронхов.
+                    </p>
+                </div>
+                <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="video-container"><video controls src="videos/video3.mp4"></video></div>
+                    <h3>3. Объем вдоха</h3>
+                    <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-light);">
+                        Медленный глубокий вдох → Задержка 2-3 сек → Полный выдох.<br>Пример: надувание шарика.<br><br>
+                        <i class="fa-solid fa-circle-info" style="color:var(--primary)"></i> Профилактика ателектазов.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ПСИХОЛОГИЯ -->
+            <div style="margin-top: 80px;">
+                <h3 style="text-align: center; margin-bottom: 30px;"><i class="fa-solid fa-users-rays" style="color:var(--primary);"></i> Психологическая реабилитация</h3>
+                <div class="psych-wrapper">
+                    <div class="psych-card-wide" data-aos="fade-up">
+                        <div class="psych-icon"><i class="fa-solid fa-spa"></i></div>
+                        <div><h4>Релаксация</h4><p style="color: var(--text-light);">По Джекобсону (напряжение-расслабление). Снятие мышечных зажимов.</p></div>
+                    </div>
+                    <div class="psych-card-wide" data-aos="fade-up" data-aos-delay="100">
+                        <div class="psych-icon"><i class="fa-regular fa-clock"></i></div>
+                        <div><h4>Медитация</h4><p style="color: var(--text-light);">Осознанное внимание на моменте "здесь и сейчас". Снижение тревожности.</p></div>
+                    </div>
+                    <div class="psych-card-wide" data-aos="fade-up" data-aos-delay="200">
+                        <div class="psych-icon"><i class="fa-solid fa-mountain-sun"></i></div>
+                        <div><h4>Визуализация</h4><p style="color: var(--text-light);">Представление безопасного места для стабилизации эмоционального фона.</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Скрины -->
+    <section id="feedback">
+        <div class="container">
+            <div class="section-title">
+                <h2>Способы обратной связи</h2>
+                <p>Примеры взаимодействия с пациентами.</p>
+            </div>
+            <div class="scrolling-wrapper" data-aos="fade-left">
+                <div class="screen-mock"><i class="fa-brands fa-telegram fa-3x" style="color: #229ED9; margin-bottom: 20px;"></i><p>Скриншот 1</p></div>
+                <div class="screen-mock"><i class="fa-brands fa-telegram fa-3x" style="color: #229ED9; margin-bottom: 20px;"></i><p>Скриншот 2</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- АНКЕТА -->
+    <section id="survey">
+        <div class="container">
+            <div class="survey-wrapper" data-aos="zoom-in">
+                <div class="section-title">
+                    <h2>Анкета пациента</h2>
+                    <p>Оценка качества жизни (SGRQ) и симптомов.</p>
+                </div>
+
+                <form id="surveyForm">
+                    <!-- 1. Общее -->
+                    <fieldset>
+                        <legend>1. Общая информация</legend>
+                        <div class="grid-3">
+                            <div class="survey-q">
+                                <label class="main-label">Возраст:</label>
+                                <input name="age" type="number" style="padding: 10px; width: 100%; border: 1px solid #cbd5e1; border-radius: 8px;">
+                            </div>
+                            <div class="survey-q">
+                                <label class="main-label">Пол:</label>
+                                <div class="radio-group">
+                                    <label class="check-label"><input type="radio" name="sex" value="М"> Мужской</label>
+                                    <label class="check-label"><input type="radio" name="sex" value="Ж"> Женский</label>
+                                </div>
+                            </div>
+                            <div class="survey-q">
+                                <label class="main-label">Стаж (лет):</label>
+                                <input name="years" type="number" style="padding: 10px; width: 100%; border: 1px solid #cbd5e1; border-radius: 8px;">
+                            </div>
+                        </div>
+                        <div class="survey-q">
+                            <label class="main-label">Форма саркоидоза:</label>
+                            <div class="radio-group">
+                                <label class="check-label"><input type="radio" name="form" value="Лег"> Легочная</label>
+                                <label class="check-label"><input type="radio" name="form" value="Внелег"> Внелегочная</label>
+                                <label class="check-label"><input type="radio" name="form" value="Смеш"> Смешанная</label>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- 2. Симптомы -->
+                    <fieldset>
+                        <legend>2. Симптомы (4 недели)</legend>
+                        <div class="survey-q">
+                            <label class="main-label">Основные жалобы:</label>
+                            <div class="checkbox-grid">
+                                <label class="check-label"><input type="checkbox" name="sym_list"> Одышка</label>
+                                <label class="check-label"><input type="checkbox" name="sym_list"> Усталость</label>
+                                <label class="check-label"><input type="checkbox" name="sym_list"> Кашель</label>
+                                <label class="check-label"><input type="checkbox" name="sym_list"> Боли в суставах</label>
+                            </div>
+                        </div>
+
+                        <label class="main-label" style="margin-top:20px;">Частота проявлений (прокрутите вправо):</label>
+                        <div class="table-scroll-container">
+                            <table class="survey-table">
+                                <thead>
+                                    <tr>
+                                        <th>Симптом</th>
+                                        <th>Никогда</th>
+                                        <th>Редко</th>
+                                        <th>Иногда</th>
+                                        <th>Часто</th>
+                                        <th>Постоянно</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Одышка</td>
+                                        <td><input type="radio" name="breath" value="1"></td>
+                                        <td><input type="radio" name="breath" value="2"></td>
+                                        <td><input type="radio" name="breath" value="3"></td>
+                                        <td><input type="radio" name="breath" value="4"></td>
+                                        <td><input type="radio" name="breath" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Кашель</td>
+                                        <td><input type="radio" name="cough" value="1"></td>
+                                        <td><input type="radio" name="cough" value="2"></td>
+                                        <td><input type="radio" name="cough" value="3"></td>
+                                        <td><input type="radio" name="cough" value="4"></td>
+                                        <td><input type="radio" name="cough" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Усталость</td>
+                                        <td><input type="radio" name="fatigue" value="1"></td>
+                                        <td><input type="radio" name="fatigue" value="2"></td>
+                                        <td><input type="radio" name="fatigue" value="3"></td>
+                                        <td><input type="radio" name="fatigue" value="4"></td>
+                                        <td><input type="radio" name="fatigue" value="5"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+
+                    <!-- 3. Активность -->
+                    <fieldset>
+                        <legend>3. Активность и Реабилитация</legend>
+                        <div class="survey-q">
+                            <label class="main-label">Испытываете ли трудности при:</label>
+                            <div class="checkbox-grid">
+                                <label class="check-label"><input type="checkbox" name="diff_walk"> Ходьбе на 500 м</label>
+                                <label class="check-label"><input type="checkbox" name="diff_stairs"> Подъеме на 1 этаж</label>
+                                <label class="check-label"><input type="checkbox" name="diff_home"> Домашних делах</label>
+                            </div>
+                        </div>
+                        <div class="survey-q">
+                            <label class="main-label">Занимаетесь ли вы ЛФК сейчас?</label>
+                            <div class="radio-group">
+                                <label class="check-label"><input type="radio" name="lfk_now" value="Да"> Да</label>
+                                <label class="check-label"><input type="radio" name="lfk_now" value="Нет"> Нет</label>
+                            </div>
+                        </div>
+                        <div class="survey-q">
+                            <label class="main-label">Интересные виды активности:</label>
+                            <div class="checkbox-grid">
+                                <label class="check-label"><input type="checkbox" name="act"> Дыхательные упр.</label>
+                                <label class="check-label"><input type="checkbox" name="act"> Скандинавская ходьба</label>
+                                <label class="check-label"><input type="checkbox" name="act"> Йога/Стретчинг</label>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- 4. Психология -->
+                    <fieldset>
+                        <legend>4. Качество жизни</legend>
+                        <div class="survey-q">
+                            <label class="main-label">Эмоциональный фон:</label>
+                            <div class="radio-group">
+                                <label class="check-label"><input type="radio" name="psy" value="Норма"> Норма</label>
+                                <label class="check-label"><input type="radio" name="psy" value="Тревога"> Тревога</label>
+                                <label class="check-label"><input type="radio" name="psy" value="Депрессия"> Депрессия</label>
+                            </div>
+                        </div>
+                        <div class="survey-q">
+                            <label class="main-label">Оцените влияние болезни (0-10):</label>
+                            <input type="range" min="0" max="10" style="width:100%; margin: 10px 0;">
+                            <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-light);">
+                                <span>0 (Нет)</span><span>10 (Макс)</span>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- 5. О ресурсе -->
+                    <fieldset>
+                        <legend>5. О ресурсе</legend>
+                        <div class="survey-q">
+                            <label class="main-label">Ваши предложения:</label>
+                            <textarea style="width:100%; height:80px; padding:10px; border-radius:8px; border:1px solid #cbd5e1; font-family: inherit;"></textarea>
+                        </div>
+                    </fieldset>
+
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn-primary">Отправить данные</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container" style="text-align: center; padding: 40px 0;">
+            <p><strong>Проект Реабилитации</strong></p>
+            <p style="opacity: 0.6; font-size: 0.9rem;">Дипломный проект. Данные обезличены.</p>
+        </div>
+    </footer>
+
+    <!-- Скрипты -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+        document.getElementById('surveyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо! Ваши ответы сохранены (демо-режим).');
+        });
+    </script>
+</body>
+</html>
