@@ -30,6 +30,8 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; outline: none; -webkit-tap-highlight-color: transparent; }
 
+        html { scroll-behavior: smooth; }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-body);
@@ -56,11 +58,7 @@
         /* --- Навигация --- */
         nav {
             position: fixed; 
-            top: 20px; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            width: 95%; 
-            max-width: 1100px; 
+            top: 20px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 1100px; 
             padding: 12px 20px;
             background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
             border: var(--glass-border); border-radius: 100px;
@@ -74,11 +72,11 @@
             color: var(--primary); font-weight: 700; font-size: 0.95rem; white-space: nowrap;
         }
         .nav-links { display: flex; align-items: center; }
-        .nav-links a.link-item { margin-left: 25px; text-decoration: none; color: var(--text-main); font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+        .nav-links a.link-item { margin-left: 20px; text-decoration: none; color: var(--text-main); font-weight: 500; font-size: 0.85rem; transition: 0.3s; }
         .nav-links a.link-item:hover { color: var(--primary); }
         .nav-btn { 
             background: var(--text-main); color: white !important; padding: 10px 24px; 
-            border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-left: 25px;
+            border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.85rem; margin-left: 20px;
             white-space: nowrap;
         }
 
@@ -124,17 +122,46 @@
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         
-        .glass-card {
-            background: var(--glass-bg); backdrop-filter: blur(12px);
-            border: var(--glass-border); border-radius: 24px; padding: 35px;
-            box-shadow: var(--glass-shadow); transition: all 0.4s ease;
-            position: relative; overflow: hidden; height: 100%; display: flex; flex-direction: column;
-        }
+         .glass-card {
+             background: var(--glass-bg); backdrop-filter: blur(12px);
+             border: var(--glass-border); border-radius: 24px; padding: 35px;
+             box-shadow: var(--glass-shadow); transition: all 0.4s ease;
+             position: relative; overflow: hidden; height: 100%; display: flex; flex-direction: column;
+         }
+         
+         /* Специальный класс для видео карточек с кнопками */
+         .video-card {
+             justify-content: space-between;
+         }
         .glass-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.95); }
         
-        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .card-header i { font-size: 1.5rem; }
-        .card-header h3 { margin: 0; font-size: 1.25rem; line-height: 1.3; }
+        /* СТИЛЬ СИНИХ КАРТОЧЕК (ИСПРАВЛЕНО) */
+        .blue-card {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white !important; /* Принудительно белый текст */
+        }
+        .blue-card:hover {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb) !important; /* Фон не меняется */
+            transform: translateY(-10px);
+            color: white !important;
+        }
+        .blue-card .card-header { border-bottom: 1px solid rgba(255,255,255,0.2); }
+        .blue-card h3, .blue-card i, .blue-card p, .blue-card li { color: white !important; }
+        .blue-card .clean-list li i { color: #6ee7b7 !important; } 
+        .blue-card .badge-info { background: rgba(255,255,255,0.2); color: white; }
+
+         .card-header { 
+             display: flex; align-items: center; gap: 15px; 
+             /* Фиксированная высота всего блока заголовка */
+             height: 80px; /* Фиксированная высота под 2 строки + отступы */
+             margin-bottom: 20px; padding-bottom: 15px; 
+             border-bottom: 1px solid rgba(0,0,0,0.05); 
+         }
+         .card-header i { font-size: 1.5rem; }
+         .card-header h3 { 
+             margin: 0; font-size: 1.25rem; line-height: 1.3; 
+             display: flex; align-items: center;
+         }
         .card-icon-box { width: 60px; height: 60px; border-radius: 18px; background: rgba(37, 99, 235, 0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 25px; }
 
         /* Typography Lists */
@@ -146,28 +173,97 @@
 
         /* Статистика */
         .stat-container { background: white; border-radius: 20px; padding: 40px; border: 1px solid #e2e8f0; }
-        .stat-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-top: 20px; }
-        .stat-box { flex: 1; text-align: left; min-width: 280px; }
+        .stat-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; margin-top: 20px; }
+        .stat-box { flex: 1; text-align: left; min-width: 250px; }
         .stat-bar-group { margin-bottom: 15px; }
         .stat-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 5px; }
         .stat-progress { height: 8px; background: #f1f5f9; border-radius: 4px; overflow: hidden; }
         .stat-fill { height: 100%; }
 
-        /* ЛФК и Видео */
-        .lfk-section { margin: 60px 0; }
-        .lfk-card { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; padding: 50px; border-radius: 25px; text-align: center; box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2); }
-        .lfk-card h3 { color: white; font-size: 2rem; margin-bottom: 20px; font-weight: 700; }
-        .lfk-text-main { font-size: 1.1rem; max-width: 800px; margin: 0 auto 30px; line-height: 1.6; opacity: 0.95; }
-        .lfk-tasks { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
-        .task-item { background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 12px; backdrop-filter: blur(5px); display: flex; align-items: center; gap: 10px; }
-        
+         /* Видео (ИСПРАВЛЕНО - фиксированная высота для ровных карточек) */
+         .video-container { 
+             width: 100%; 
+             background: #000; 
+             border-radius: 20px; 
+             overflow: hidden; 
+             margin-bottom: 20px; 
+             display: flex; 
+             justify-content: center; 
+             align-items: center; 
+             /* Фиксируем высоту под вертикальные видео, чтобы карточки были ровными */
+             height: 500px; 
+         }
+         video { 
+             /* Видео само подстроится, не вылезая за рамки */
+             width: 100%; 
+             height: 100%; 
+             object-fit: contain; /* Это сохранит пропорции видео внутри блока */
+         }
+
+        /* Раскрывашка */
+        .expand-content { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.1); }
+        .expand-btn {
+            background: none; border: 1px solid var(--primary); color: var(--primary);
+            padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 0.85rem;
+            margin-top: 15px; transition: 0.3s;
+        }
+        .expand-btn:hover { background: var(--primary); color: white; }
+
+         /* Стиль для PNG картинок внутри карточек */
+         .glass-img {
+             width: 100%;
+             height: 200px; /* Фиксированная высота для всех картинок */
+             object-position: center; /* Центрируем картинку */
+             margin-bottom: 20px;
+             border-radius: 12px; /* Скругляем углы */
+             filter: drop-shadow(0 10px 15px rgba(37, 99, 235, 0.2)); /* Красивая тень под объектом */
+         }
+         
+         /* Для первых двух картинок - растягиваем */
+         .glass-img.stretch {
+             object-fit: cover; /* Растягиваем/обрезаем */
+         }
+         
+         /* Для третьей картинки - показываем полностью */
+         .glass-img.fit {
+             object-fit: contain; /* Показываем полностью */
+             background: rgba(37, 99, 235, 0.02); /* Светлый фон для пустых областей */
+         }
+
+         /* Файлы */
+         .file-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 40px; }
+        .file-card {
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(10px);
+            border: 1px solid white; border-radius: 12px; padding: 15px;
+            display: flex; align-items: center; gap: 15px; text-decoration: none;
+            color: var(--text-main); transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+        .file-card:hover { transform: translateY(-3px); border-color: var(--primary); }
+        .file-icon { font-size: 1.5rem; color: var(--accent); }
+        .file-info { font-size: 0.9rem; font-weight: 600; line-height: 1.2; }
+        .file-info span { display: block; font-size: 0.75rem; color: var(--text-light); font-weight: 400; margin-top: 3px; }
+
+        /* Аккордеон */
+        .accordion { display: flex; flex-direction: column; gap: 15px; }
+        .acc-item { background: white; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; }
+        .acc-header {
+            padding: 20px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+            font-weight: 600; font-size: 1.05rem; transition: 0.2s;
+        }
+        .acc-header:hover { background: #f8fafc; color: var(--primary); }
+        .acc-header i { transition: 0.3s; color: var(--text-light); }
+        .acc-body { display: none; padding: 0 20px 20px; color: var(--text-light); font-size: 0.95rem; line-height: 1.7; }
+        .acc-item.active .acc-body { display: block; }
+        .acc-item.active .acc-header { color: var(--primary); }
+        .acc-item.active .acc-header i { transform: rotate(180deg); color: var(--primary); }
+        .acc-warning { border-left: 4px solid var(--accent); }
+        .acc-warning .acc-header { color: var(--accent); }
+
+        /* Психология */
         .psych-wrapper { display: flex; flex-direction: column; gap: 20px; }
         .psych-card-wide { background: white; border-radius: 20px; padding: 30px; border: 1px solid #e2e8f0; display: flex; align-items: flex-start; gap: 25px; transition: 0.3s; }
         .psych-card-wide:hover { transform: translateX(10px); border-color: var(--primary); }
         .psych-icon { width: 60px; height: 60px; background: #ecfeff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--secondary); flex-shrink: 0; }
-        
-        .video-container { width: 100%; background: #000; border-radius: 20px; overflow: hidden; margin-bottom: 20px; display: flex; justify-content: center; align-items: center; max-height: 550px; }
-        video { width: 100%; height: auto; max-height: 550px; object-fit: contain; }
 
         /* --- АНКЕТА --- */
         .survey-wrapper { background: white; border-radius: 30px; padding: 50px; box-shadow: 0 20px 60px rgba(0,0,0,0.06); max-width: 900px; margin: 0 auto; }
@@ -177,40 +273,25 @@
         .survey-q { margin-bottom: 25px; }
         .survey-q label.main-label { display: block; font-weight: 600; margin-bottom: 10px; color: var(--text-main); }
         
-        /* Чекбоксы и радио */
         .radio-group { display: flex; flex-wrap: wrap; gap: 15px; }
-        .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .checkbox-grid { display: grid; grid-template-columns: 1fr; gap: 10px; } /* В столбик */
         
-        .check-label { display: flex; align-items: center; gap: 8px; font-weight: 400 !important; cursor: pointer; background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px solid transparent; transition: 0.2s; }
+        .check-label { display: flex; align-items: center; gap: 8px; font-weight: 400 !important; cursor: pointer; background: #f8fafc; padding: 10px 15px; border-radius: 8px; border: 1px solid transparent; transition: 0.2s; }
         .check-label:hover { background: #eff6ff; border-color: var(--primary); }
         .check-label input { accent-color: var(--primary); transform: scale(1.1); }
+        .text-input { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; font-family: inherit; }
 
-        /* НОВЫЙ СТИЛЬ ДЛЯ СИМПТОМОВ (ВМЕСТО ТАБЛИЦЫ) */
-        .symptom-card {
-            background: #fff; border: 1px solid #e2e8f0; 
-            border-radius: 12px; padding: 20px; margin-bottom: 20px;
-        }
-        .symptom-name { 
-            font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 15px; 
-            display: flex; align-items: center; gap: 10px;
-        }
-        .symptom-name i { color: var(--secondary); opacity: 0.7; }
-        
-        .rating-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
-            gap: 10px; 
-        }
-
-        .scrolling-wrapper { display: flex; gap: 25px; overflow-x: auto; padding: 20px 10px; -webkit-overflow-scrolling: touch; }
-        .screen-mock { min-width: 240px; height: 400px; background: white; border-radius: 30px; border: 8px solid #f1f5f9; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #94a3b8; text-align: center; }
+        /* Контакты */
+        .contact-card { text-align: center; }
+        .contact-header { font-size: 1.5rem; margin-bottom: 10px; font-weight: 700; }
+        .contact-role { color: var(--text-light); margin-bottom: 30px; font-size: 1rem; }
+        .contact-links { display: flex; flex-direction: column; gap: 15px; align-items: center; }
+        .contact-item { display: flex; align-items: center; gap: 15px; background: white; padding: 15px 25px; border-radius: 50px; text-decoration: none; color: var(--text-main); border: 1px solid #e2e8f0; transition: 0.3s; width: 100%; max-width: 400px; justify-content: center; }
+        .contact-item:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
 
         /* --- МОБИЛЬНЫЕ ПРАВКИ --- */
         @media (max-width: 900px) {
-            /* Меню */
-            nav { 
-                width: 92%; top: 15px; padding: 8px 12px; justify-content: space-between; left: 50%; transform: translateX(-50%);
-            }
+            nav { width: 92%; top: 15px; padding: 8px 12px; justify-content: space-between; left: 50%; transform: translateX(-50%); }
             .logo-box { font-size: 0.75rem; padding: 5px 10px; max-width: 140px; overflow: hidden; text-overflow: ellipsis; }
             .nav-links a.link-item { display: none; }
             .nav-btn { margin-left: 5px; padding: 8px 14px; font-size: 0.75rem; }
@@ -227,17 +308,19 @@
             .stat-container { padding: 25px; }
             .stat-row { flex-direction: column; gap: 30px; }
             
-            /* Анкета */
             .survey-wrapper { padding: 25px 15px; width: 100%; overflow: hidden; }
             .checkbox-grid { grid-template-columns: 1fr; }
             .radio-group { flex-direction: column; gap: 8px; }
             
-            /* ВАЖНО: Симптомы в одну колонку на мобиле */
-            .rating-grid { grid-template-columns: 1fr; }
-            
-            .psych-card-wide { flex-direction: column; text-align: center; align-items: center; padding: 25px; }
-            .lfk-card { padding: 30px 20px; }
-        }
+             .psych-card-wide { flex-direction: column; text-align: center; align-items: center; padding: 25px; }
+             
+             /* Мобильные стили для новых элементов */
+             .video-container { height: 300px; } /* Видео меньше на мобилках */
+             .glass-img { height: 150px; } /* Картинки меньше */
+             .file-grid { grid-template-columns: 1fr; } /* Файлы в столбик */
+             .acc-header { padding: 15px; font-size: 0.95rem; } /* Аккордеон компактнее */
+             .acc-body { padding: 0 15px 15px; }
+         }
     </style>
 </head>
 <body>
@@ -249,12 +332,14 @@
 
     <!-- Меню -->
     <nav>
-        <div class="logo-box">Саркоидоз.Rehab <i class="fa-solid fa-cat"></i></div>
+        <div class="logo-box">Саркоидоз.Help <i class="fa-solid fa-heart-pulse"></i></div>
         <div class="nav-links">
             <a href="#about" class="link-item">О болезни</a>
             <a href="#med-rehab" class="link-item">Лечение</a>
             <a href="#exercises" class="link-item">Упражнения</a>
-            <a href="#survey" class="nav-btn">Анкета</a>
+            <a href="#self-control" class="link-item">Самоконтроль</a>
+            <a href="#survey" class="link-item">Анкета</a>
+            <a href="#feedback" class="nav-btn">Контакты</a>
         </div>
     </nav>
 
@@ -263,9 +348,9 @@
         <div class="container hero-grid">
             <div data-aos="fade-up">
                 <h1>Дышите свободно,<br><span>живите полной жизнью</span></h1>
-                <p>Применение средств физической реабилитации для восстановления работы органов дыхания при саркоидозе.</p>
+                <p>Ознакомьтесь с образовательным ресурсом для лиц зрелого возраста, страдающих саркоидозом</p>
                 <div class="hero-actions">
-                    <a href="#exercises" class="btn-primary">Перейти к упражнениям <i class="fa-solid fa-arrow-down"></i></a>
+                    <a href="#exercises" class="btn-primary">Перейти к материалам <i class="fa-solid fa-arrow-down"></i></a>
                 </div>
             </div>
             <div class="visual-container" data-aos="zoom-in">
@@ -283,29 +368,29 @@
             <div class="section-title" data-aos="fade-up">
                 <h2>Что важно знать?</h2>
                 <div class="line-art"></div>
-                <p>Этиология, патогенез и клиническая картина.</p>
+                <p>Этиология, клиническая картина и диагностика.</p>
             </div>
-            <div class="grid-3">
-                <div class="glass-card" data-aos="fade-up">
-                    <div class="card-icon-box"><i class="fa-solid fa-microscope"></i></div>
-                    <h3>Что это?</h3>
-                    <p style="margin-top: 15px; color: var(--text-light);">Саркоидоз — системное заболевание с образованием гранулем. Чаще всего поражаются легкие и внутригрудные лимфоузлы (ВГЛУ).</p>
-                </div>
-                <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card-icon-box"><i class="fa-solid fa-head-side-cough"></i></div>
-                    <h3>Симптомы</h3>
-                    <p style="margin-top: 15px; color: var(--text-light);">Одышка, сухой кашель, дискомфорт в груди, утомляемость. Часто протекает бессимптомно.</p>
-                </div>
-                <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card-icon-box"><i class="fa-solid fa-stethoscope"></i></div>
-                    <h3>Диагностика</h3>
-                    <p style="margin-top: 15px; color: var(--text-light);">Рентген/КТ, спирометрия (ФВД), анализы крови. Исключение туберкулеза и других инфекций.</p>
-                </div>
-            </div>
+             <div class="grid-3">
+                 <div class="glass-card" data-aos="fade-up">
+                     <img src="png/IMG_8497.PNG" alt="Что это" class="glass-img stretch">
+                     <h3>Что это?</h3>
+                     <p style="margin-top: 15px; color: var(--text-light);">Саркоидоз — системное заболевание с образованием гранулем. Чаще всего поражаются легкие и внутригрудные лимфоузлы (ВГЛУ).</p>
+                 </div>
+                 <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                     <img src="png/IMG_8499.PNG" alt="Симптомы" class="glass-img stretch">
+                     <h3>Симптомы</h3>
+                     <p style="margin-top: 15px; color: var(--text-light);">Одышка, сухой кашель, дискомфорт в груди, утомляемость. Часто протекает бессимптомно.</p>
+                 </div>
+                 <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+                     <img src="png/IMG_8498.PNG" alt="Диагностика" class="glass-img fit">
+                     <h3>Диагностика</h3>
+                     <p style="margin-top: 15px; color: var(--text-light);">Рентген/КТ, спирометрия (ФВД), анализы крови. Исключение туберкулеза и других инфекций.</p>
+                 </div>
+             </div>
         </div>
     </section>
 
-    <!-- 2. СТАТИСТИКА -->
+    <!-- 2. СТАТИСТИКА (ОБНОВЛЕННАЯ) -->
     <section id="statistics">
         <div class="container">
             <div class="section-title" data-aos="fade-up">
@@ -319,6 +404,7 @@
                     <p style="text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; color: var(--text-light);">Пациентов на учете</p>
                 </div>
                 <div class="stat-row">
+                    <!-- Возраст -->
                     <div class="stat-box">
                         <h4>Возраст</h4>
                         <div class="stat-bar-group">
@@ -334,6 +420,21 @@
                             <div class="stat-progress"><div class="stat-fill" style="width: 3%; background: #cbd5e1;"></div></div>
                         </div>
                     </div>
+                    
+                    <!-- Пол (НОВЫЙ) -->
+                     <div class="stat-box">
+                        <h4>Пол</h4>
+                        <div class="stat-bar-group">
+                            <div class="stat-label"><span>Женщины</span> <strong>88 чел. (73%)</strong></div>
+                            <div class="stat-progress"><div class="stat-fill" style="width: 73%; background: var(--accent);"></div></div>
+                        </div>
+                        <div class="stat-bar-group">
+                            <div class="stat-label"><span>Мужчины</span> <strong>32 чел. (27%)</strong></div>
+                            <div class="stat-progress"><div class="stat-fill" style="width: 27%; background: var(--primary);"></div></div>
+                        </div>
+                    </div>
+
+                    <!-- Диагноз -->
                     <div class="stat-box">
                         <h4>Диагноз (МКБ-10)</h4>
                         <div class="stat-bar-group">
@@ -354,7 +455,7 @@
         </div>
     </section>
 
-    <!-- 3. ГОСПИТАЛЬНЫЙ ЭТАП -->
+    <!-- 3. ГОСПИТАЛЬНЫЙ ЭТАП (ИСПРАВЛЕННЫЙ ЦВЕТ) -->
     <section id="med-rehab">
         <div class="container">
             <div class="section-title" data-aos="fade-up">
@@ -362,10 +463,13 @@
                 <p>(от 14 до 21 дня)</p>
                 <div class="line-art"></div>
             </div>
-            <div class="grid-2">
-                <div class="glass-card" data-aos="fade-right">
+            
+            <div class="grid-3">
+                
+                <!-- 1. Медикаменты -->
+                <div class="glass-card blue-card" data-aos="fade-right">
                     <div class="card-header">
-                        <i class="fa-solid fa-pills" style="color: var(--primary);"></i>
+                        <i class="fa-solid fa-pills" style="color: white;"></i>
                         <h3>Медикаментозная терапия</h3>
                     </div>
                     <div style="flex-grow: 1;">
@@ -373,36 +477,42 @@
                         <ul class="clean-list">
                             <li><i class="fa-solid fa-check"></i> <span>Глюкокортикостероиды (ГКС)</span></li>
                             <li><i class="fa-solid fa-check"></i> <span>Цитостатики</span></li>
-                            <li><i class="fa-solid fa-check"></i> <span>Ингаляционная терапия с муколитиками (при наличии бронхита)</span></li>
+                            <li><i class="fa-solid fa-check"></i> <span>Ингаляционная терапия с муколитиками</span></li>
                         </ul>
                     </div>
                 </div>
-                <div class="glass-card" data-aos="fade-left">
+                
+                <!-- 2. Физиотерапия -->
+                <div class="glass-card blue-card" data-aos="fade-up">
                     <div class="card-header">
-                        <i class="fa-solid fa-bolt" style="color: var(--secondary);"></i>
+                        <i class="fa-solid fa-bolt" style="color: white;"></i>
                         <h3>Физиотерапия</h3>
                     </div>
                     <div style="flex-grow: 1;">
-                        <ul class="clean-list">
-                            <li><i class="fa-solid fa-check"></i> <span><strong>Ультразвук</strong> на грудную клетку (улучшение микроциркуляции).</span></li>
-                            <li><i class="fa-solid fa-check"></i> <span><strong>Электрофорез</strong> (калия йодид, лидаза) — рассасывающее действие.</span></li>
-                        </ul>
+                         <p style="font-size: 0.9rem; margin-bottom: 20px; opacity: 0.9; color:white !important;">Методы физического воздействия.</p>
+                         <ul class="clean-list">
+                             <li><i class="fa-solid fa-check"></i> <span><strong style="color: white; font-weight: 700;">Ультразвук</strong> на грудную клетку (улучшение микроциркуляции).</span></li>
+                             <li><i class="fa-solid fa-check"></i> <span><strong style="color: white; font-weight: 700;">Электрофорез</strong> (калия йодид, лидаза) — рассасывающее действие.</span></li>
+                         </ul>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- 4. ЛФК -->
-    <section class="lfk-section">
-        <div class="container">
-            <div class="lfk-card" data-aos="zoom-in">
-                <h3><i class="fa-solid fa-person-walking"></i> ЛФК и Физическая реабилитация</h3>
-                <p class="lfk-text-main">Задача: повысить толерантность к нагрузке, улучшить функцию внешнего дыхания (ФВД), укрепить мышцы, которые участвуют в процессе дыхания.</p>
-                <div class="lfk-tasks">
-                    <div class="task-item"><i class="fa-solid fa-chart-line"></i> Толерантность</div>
-                    <div class="task-item"><i class="fa-solid fa-lungs"></i> Функция ФВД</div>
-                    <div class="task-item"><i class="fa-solid fa-dumbbell"></i> Мышцы</div>
+                <!-- 3. ЛФК -->
+                <div class="glass-card blue-card" data-aos="fade-left">
+                    <div class="card-header">
+                        <i class="fa-solid fa-person-walking" style="color: white;"></i>
+                        <h3>ЛФК и Физическая реабилитация</h3>
+                    </div>
+                    <div style="flex-grow: 1;">
+                        <p style="font-size: 0.9rem; margin-bottom: 20px; opacity: 0.9; color:white !important;">
+                            Задача: повысить толерантность к нагрузке, улучшить функцию внешнего дыхания (ФВД).
+                        </p>
+                        <ul class="clean-list">
+                             <li><i class="fa-solid fa-check"></i> Толерантность</li>
+                             <li><i class="fa-solid fa-check"></i> Функция ФВД</li>
+                             <li><i class="fa-solid fa-check"></i> Мышцы дыхания</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -411,38 +521,74 @@
     <!-- 5. АМБУЛАТОРНЫЙ ЭТАП -->
     <section id="exercises" style="background: rgba(255,255,255,0.5);">
         <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2>Амбулаторно-поликлинический этап</h2>
-                <div class="line-art"></div>
-                <p style="max-width: 800px; margin: 0 auto;">Цель: восстановление функциональных показателей или адаптация пациента к новой ситуации.</p>
-            </div>
+             <div class="section-title" data-aos="fade-up">
+                 <h2>Амбулаторно-поликлинический этап</h2>
+                 <p>(наблюдение до 6 месяцев)</p>
+                 <div class="line-art"></div>
+                 <p style="max-width: 900px; margin: 0 auto;">Цель: восстановление функциональных показателей или адаптация пациента к новой ситуации. Предполагает выполнение дыхательной гимнастики в домашних условиях или в зале АФК.</p>
+             </div>
+            
+            <!-- Дыхательная гимнастика -->
             <div class="grid-3">
-                <div class="glass-card" data-aos="fade-up">
-                    <div class="video-container"><video controls src="Videos/video1.MP4"></video></div>
-                    <h3>1. Диафрагмальное дыхание</h3>
-                    <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-light);">
-                        <strong>ИП:</strong> лёжа на спине, ноги согнуты. Рука на животе.<br>
-                        <strong>Вдох:</strong> живот выпячивается.<br>
-                        <strong>Выдох:</strong> живот втягивается (1:2).<br><br>
-                        <i class="fa-solid fa-circle-info" style="color:var(--primary)"></i> Стимулирует нижние доли легких.
-                    </p>
-                </div>
-                <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="video-container"><video controls src="Videos/video2.MP4"></video></div>
-                    <h3>2. С сопротивлением</h3>
-                    <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-light);">
-                        Выдох через губы трубочкой или коктейльную трубочку в воду.<br><br>
-                        <i class="fa-solid fa-circle-info" style="color:var(--primary)"></i> Предотвращает коллапс мелких бронхов.
-                    </p>
-                </div>
-                <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="video-container"><video controls src="Videos/video3.mp4"></video></div>
-                    <h3>3. Объем вдоха</h3>
-                    <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-light);">
-                        Медленный глубокий вдох → Задержка 2-3 сек → Полный выдох.<br>Пример: надувание шарика.<br><br>
-                        <i class="fa-solid fa-circle-info" style="color:var(--primary)"></i> Профилактика ателектазов.
-                    </p>
-                </div>
+                 <!-- 1 -->
+                 <div class="glass-card video-card" data-aos="fade-up">
+                     <div style="flex-grow: 1;">
+                         <div class="video-container"><video controls src="Videos/video1.MP4"></video></div>
+                         <h3>1. Диафрагмальное дыхание</h3>
+                         <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 10px;">Стимулирует работу нижних долей лёгких и оксигенацию.</p>
+                     </div>
+                     
+                     <div style="margin-top: auto; padding-top: 20px;">
+                         <button class="expand-btn" onclick="toggleEx(this)">Показать технику выполнения <i class="fa-solid fa-chevron-down"></i></button>
+                         <div class="expand-content">
+                             <p style="font-size: 0.9rem;">
+                                 <strong>ИП:</strong> лёжа на спине с согнутыми ногами, одна рука располагается на груди, другая — на животе.<br>
+                                 <strong>На вдохе:</strong> живот медленно выпячивается (рука на животе поднимается).<br>
+                                 <strong>На выдохе:</strong> живот втягивается. Выдох должен быть продолжительнее вдоха (соотношение 1:2).
+                             </p>
+                         </div>
+                     </div>
+                 </div>
+
+                 <!-- 2 -->
+                 <div class="glass-card video-card" data-aos="fade-up" data-aos-delay="100">
+                     <div style="flex-grow: 1;">
+                         <div class="video-container"><video controls src="Videos/video2.MP4"></video></div>
+                         <h3>2. С сопротивлением на выдохе</h3>
+                         <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 10px;">Предотвращает коллапс мелких бронхов, улучшает вентиляцию.</p>
+                     </div>
+                     
+                     <div style="margin-top: auto; padding-top: 20px;">
+                         <button class="expand-btn" onclick="toggleEx(this)">Показать технику выполнения <i class="fa-solid fa-chevron-down"></i></button>
+                         <div class="expand-content">
+                             <p style="font-size: 0.9rem;">
+                                 Выполняется через губы, сложенные трубочкой, или через коктейльную трубочку, опущенную в стакан с водой.<br>
+                                 Создаваемое сопротивление способствует удалению остаточного воздуха из альвеол.
+                             </p>
+                         </div>
+                     </div>
+                 </div>
+
+                 <!-- 3 -->
+                 <div class="glass-card video-card" data-aos="fade-up" data-aos-delay="200">
+                     <div style="flex-grow: 1;">
+                         <div class="video-container"><video controls src="Videos/video3.MP4"></video></div>
+                         <h3>3. Объем вдоха</h3>
+                         <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 10px;">Профилактика ателектазов (спадения участков легкого).</p>
+                     </div>
+                     
+                     <div style="margin-top: auto; padding-top: 20px;">
+                         <button class="expand-btn" onclick="toggleEx(this)">Показать технику выполнения <i class="fa-solid fa-chevron-down"></i></button>
+                         <div class="expand-content">
+                             <p style="font-size: 0.9rem;">
+                                 1. Выполнить медленный, глубокий вдох.<br>
+                                 2. Задержать дыхание на 2-3 секунды для улучшения распределения воздуха.<br>
+                                 3. Медленный, полный выдох.<br>
+                                 <em>Пример: надувание воздушного шара. Особенно актуально для маломобильных пациентов.</em>
+                             </p>
+                         </div>
+                     </div>
+                 </div>
             </div>
 
             <!-- ПСИХОЛОГИЯ -->
@@ -466,108 +612,267 @@
         </div>
     </section>
 
-    <!-- Скрины -->
-    <section id="feedback">
+    <!-- САМОКОНТРОЛЬ -->
+    <section id="self-control">
         <div class="container">
-            <div class="section-title">
-                <h2>Способы обратной связи</h2>
-                <p>Примеры взаимодействия с пациентами.</p>
+            <div class="section-title" data-aos="fade-up">
+                <h2>Самоконтроль и реабилитация в домашних условиях</h2>
+                <div class="line-art"></div>
+                <p>Методы самоконтроля.</p>
             </div>
-            <div class="scrolling-wrapper" data-aos="fade-left">
-                <div class="screen-mock"><i class="fa-brands fa-telegram fa-3x" style="color: #229ED9; margin-bottom: 20px;"></i><p>Скриншот 1</p></div>
-                <div class="screen-mock"><i class="fa-brands fa-telegram fa-3x" style="color: #229ED9; margin-bottom: 20px;"></i><p>Скриншот 2</p></div>
+
+            <!-- Аккордеон -->
+            <div class="accordion" data-aos="fade-up">
+                
+                <!-- Пункт 1 -->
+                <div class="acc-item">
+                    <div class="acc-header" onclick="toggleAcc(this)">
+                        <span>1. Наблюдение за симптомами (Ведение дневника)</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="acc-body">
+                        <p>Записывайте в блокнот или используйте заметки на телефоне. Цель: выявить тенденции ухудшений и улучшений.</p>
+                        <ul style="padding-left: 20px; margin-top: 10px;">
+                            <li><strong>Одышка:</strong> отмечайте, при какой нагрузке появляется (лестница, ходьба). Усиливается ли?</li>
+                            <li><strong>Кашель:</strong> сухой или с мокротой? Ночной?</li>
+                            <li><strong>Боль в груди:</strong> где именно, характер?</li>
+                            <li><strong>Общие симптомы:</strong> слабость, потливость, температура.</li>
+                            <li><strong>Внелегочные проявления:</strong> боли в суставах, кожа, зрение.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Пункт 2 -->
+                <div class="acc-item">
+                    <div class="acc-header" onclick="toggleAcc(this)">
+                        <span>2. Контроль дыхательной функции</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="acc-body">
+                        <p>
+                            <strong>Тест с ходьбой:</strong> засеките, сколько метров пройдете за 6 минут в привычном темпе. Оцените одышку (0-10).<br>
+                            <strong>Пикфлоуметрия:</strong> измерение пиковой скорости выдоха прибором. Показывает сужение путей.<br>
+                            <strong>Проба Штанге:</strong> задержка дыхания после глубокого вдоха. Норма 30-40 сек.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Пункт 3 -->
+                <div class="acc-item">
+                    <div class="acc-header" onclick="toggleAcc(this)">
+                        <span>3. Мониторинг физической активности</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="acc-body">
+                        <p>
+                            <strong>Толерантность к нагрузке:</strong> можете ли вы выполнять ту же работу, что месяц назад?<br>
+                            <strong>Регулярные нагрузки:</strong> ЛФК, ходьба, плавание улучшают функцию легких. Нагрузка должна быть комфортной.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Пункт 4 -->
+                <div class="acc-item">
+                    <div class="acc-header" onclick="toggleAcc(this)">
+                        <span>4. Измерение жизненно важных показателей</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="acc-body">
+                        <p>
+                            <strong>Термометрия:</strong> регулярное измерение температуры.<br>
+                            <strong>Пульсоксиметрия:</strong> SpO2 (сатурация). Снижение ниже 94% — тревожный сигнал.<br>
+                            <strong>Контроль веса:</strong> взвешивание 1 раз в неделю. Резкие изменения важны.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Пункт 5 -->
+                <div class="acc-item">
+                    <div class="acc-header" onclick="toggleAcc(this)">
+                        <span>5. Внимание к общему здоровью и профилактика</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="acc-body">
+                        <p>Отказ от курения. Избегание пыли и плесени. Вакцинация (грипп, пневмококк). Гигиена рук. Психоэмоциональное состояние (работа с тревогой).</p>
+                    </div>
+                </div>
+
+                <!-- Пункт 6 -->
+                <div class="acc-item">
+                    <div class="acc-header" onclick="toggleAcc(this)">
+                        <span>6. Взаимодействие с лечащим врачом</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="acc-body">
+                        <p>Сообщайте врачу о новых симптомах, усугублении старых, побочных эффектах терапии и результатах домашнего дневника.</p>
+                    </div>
+                </div>
+
+                <!-- WARNING -->
+                <div class="acc-item acc-warning">
+                    <div class="acc-header" onclick="toggleAcc(this)">
+                        <span><i class="fa-solid fa-triangle-exclamation"></i> Чего НЕЛЬЗЯ делать при самоконтроле</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="acc-body">
+                        <ol style="padding-left: 20px;">
+                            <li>Самостоятельно отменять или менять дозировки препаратов.</li>
+                            <li>Ставить себе диагнозы на основе симптомов.</li>
+                            <li>Паниковать при единичном ухудшении.</li>
+                            <li>Перетруждаться во вред общему состоянию.</li>
+                        </ol>
+                    </div>
+                </div>
+
             </div>
+
+            <!-- Файлы для скачивания (ВНИЗУ) -->
+              <div class="file-grid" data-aos="fade-up">
+                 <a href="files/Дневник самоконтроля.Шаблоны.pdf" class="file-card" target="_blank">
+                     <i class="fa-solid fa-file-pdf file-icon"></i>
+                     <div class="file-info">Дневник самоконтроля<span>PDF</span></div>
+                 </a>
+                 <a href="files/Дневник пикфлоуметрии.pdf" class="file-card" target="_blank">
+                     <i class="fa-solid fa-file-pdf file-icon"></i>
+                     <div class="file-info">Дневник пикфлоуметрии<span>PDF</span></div>
+                 </a>
+                 <a href="files/Памятка,_установленная_клиническими_рекоммендациями_1.pdf" class="file-card" target="_blank">
+                     <i class="fa-solid fa-file-pdf file-icon"></i>
+                     <div class="file-info">Памятка пациента<span>PDF</span></div>
+                 </a>
+                 <a href="files/Лекция по реабилитации.pdf" class="file-card" target="_blank">
+                     <i class="fa-solid fa-file-pdf file-icon"></i>
+                     <div class="file-info">Лекция по реабилитации<span>PDF</span></div>
+                 </a>
+                 <a href="files/Лекция самоконтроль.pdf" class="file-card" target="_blank">
+                     <i class="fa-solid fa-file-pdf file-icon"></i>
+                     <div class="file-info">Лекция самоконтроль<span>PDF</span></div>
+                 </a>
+             </div>
         </div>
     </section>
 
-    <!-- АНКЕТА (БЕЗ ТАБЛИЦЫ, КАРТОЧКИ) -->
+    <!-- АНКЕТА (GOOGLE FORM INTEGRATION) -->
     <section id="survey">
         <div class="container">
             <div class="survey-wrapper" data-aos="zoom-in">
                 <div class="section-title">
                     <h2>Анкета пациента</h2>
-                    <p>Оценка качества жизни (SGRQ) и симптомов.</p>
+                    <p>Оценка качества жизни и симптомов.</p>
                 </div>
+                
+                <!-- Скрытый iframe, чтобы не уходить со страницы после отправки -->
+                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {alert('Спасибо! Ваши ответы успешно отправлены в базу данных.');}"></iframe>
 
-                <form id="surveyForm">
+                <!-- FORM Action = Ссылка на Google Form Response -->
+                <form id="googleForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfuTlJ-GCRlv50GphGR-rCLUr9d2eKnzcljTSwjX-L-Mbnqnw/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+                    
                     <!-- 1. Общее -->
                     <fieldset>
                         <legend>1. Общая информация</legend>
                         <div class="grid-3">
                             <div class="survey-q">
                                 <label class="main-label">Возраст:</label>
-                                <input name="age" type="number" style="padding: 10px; width: 100%; border: 1px solid #cbd5e1; border-radius: 8px;">
+                                <!-- entry.1187488764 = Возраст -->
+                                <input name="entry.1187488764" type="number" class="text-input" required>
                             </div>
                             <div class="survey-q">
                                 <label class="main-label">Пол:</label>
+                                <!-- entry.71800881 = Пол -->
                                 <div class="radio-group">
-                                    <label class="check-label"><input type="radio" name="sex" value="М"> Мужской</label>
-                                    <label class="check-label"><input type="radio" name="sex" value="Ж"> Женский</label>
+                                    <label class="check-label"><input type="radio" name="entry.71800881" value="Мужской" required> Мужской</label>
+                                    <label class="check-label"><input type="radio" name="entry.71800881" value="Женский"> Женский</label>
                                 </div>
                             </div>
                             <div class="survey-q">
                                 <label class="main-label">Стаж (лет):</label>
-                                <input name="years" type="number" style="padding: 10px; width: 100%; border: 1px solid #cbd5e1; border-radius: 8px;">
+                                <!-- entry.790315125 = Стаж -->
+                                <input name="entry.790315125" type="number" class="text-input" required>
                             </div>
                         </div>
                         <div class="survey-q">
                             <label class="main-label">Форма саркоидоза:</label>
+                            <!-- entry.2063193133 = Форма -->
                             <div class="radio-group">
-                                <label class="check-label"><input type="radio" name="form" value="Лег"> Легочная</label>
-                                <label class="check-label"><input type="radio" name="form" value="Внелег"> Внелегочная</label>
-                                <label class="check-label"><input type="radio" name="form" value="Смеш"> Смешанная</label>
+                                <label class="check-label"><input type="radio" name="entry.2063193133" value="Легочная"> Легочная</label>
+                                <label class="check-label"><input type="radio" name="entry.2063193133" value="Внелегочная"> Внелегочная</label>
+                                <label class="check-label"><input type="radio" name="entry.2063193133" value="Смешанная"> Смешанная</label>
                             </div>
                         </div>
                     </fieldset>
 
-                    <!-- 2. Симптомы (НОВЫЙ ВИД) -->
+                    <!-- 2. Симптомы -->
                     <fieldset>
-                        <legend>2. Симптомы (4 недели)</legend>
+                        <legend>2. Симптомы</legend>
                         <div class="survey-q">
-                            <label class="main-label">Основные жалобы:</label>
+                            <label class="main-label">Какие симптомы беспокоят чаще всего?</label>
+                            <!-- entry.1586579355 = Симптомы (Множественный выбор) -->
                             <div class="checkbox-grid">
-                                <label class="check-label"><input type="checkbox" name="sym_list"> Одышка</label>
-                                <label class="check-label"><input type="checkbox" name="sym_list"> Усталость</label>
-                                <label class="check-label"><input type="checkbox" name="sym_list"> Кашель</label>
-                                <label class="check-label"><input type="checkbox" name="sym_list"> Боли в суставах</label>
+                                <label class="check-label"><input type="checkbox" name="entry.1586579355" value="Одышка"> Одышка</label>
+                                <label class="check-label"><input type="checkbox" name="entry.1586579355" value="Хроническая усталость"> Хроническая усталость</label>
+                                <label class="check-label"><input type="checkbox" name="entry.1586579355" value="Кашель"> Кашель</label>
+                                <label class="check-label"><input type="checkbox" name="entry.1586579355" value="Боль в суставах/мышцах"> Боль в суставах/мышцах</label>
+                            </div>
+                            <div style="margin-top:10px;">
+                                <input type="text" name="entry.1586579355" placeholder="Другое (укажите)" class="text-input">
                             </div>
                         </div>
 
-                        <label class="main-label" style="margin-top:30px; margin-bottom: 20px;">Как часто проявляются симптомы?</label>
+                        <label class="main-label" style="margin-top:30px; margin-bottom: 10px;">Как часто проявляются симптомы?</label>
                         
-                        <!-- Одышка -->
-                        <div class="symptom-card">
-                            <div class="symptom-name"><i class="fa-solid fa-lungs"></i> Одышка</div>
-                            <div class="rating-grid">
-                                <label class="check-label"><input type="radio" name="breath" value="1"> Никогда</label>
-                                <label class="check-label"><input type="radio" name="breath" value="2"> Редко</label>
-                                <label class="check-label"><input type="radio" name="breath" value="3"> Иногда</label>
-                                <label class="check-label"><input type="radio" name="breath" value="4"> Часто</label>
-                                <label class="check-label"><input type="radio" name="breath" value="5"> Постоянно</label>
+                        <!-- Одышка (entry.1821027180) -->
+                        <div style="margin-bottom: 20px;">
+                            <label style="font-weight:600; color:var(--primary);">Одышка:</label>
+                            <div class="radio-group" style="margin-top:5px;">
+                                <label class="check-label"><input type="radio" name="entry.1821027180" value="Никогда"> Никогда</label>
+                                <label class="check-label"><input type="radio" name="entry.1821027180" value="Редко"> Редко</label>
+                                <label class="check-label"><input type="radio" name="entry.1821027180" value="Иногда"> Иногда</label>
+                                <label class="check-label"><input type="radio" name="entry.1821027180" value="Часто"> Часто</label>
+                                <label class="check-label"><input type="radio" name="entry.1821027180" value="Постоянно"> Постоянно</label>
                             </div>
                         </div>
 
-                        <!-- Кашель -->
-                        <div class="symptom-card">
-                            <div class="symptom-name"><i class="fa-solid fa-head-side-cough"></i> Кашель</div>
-                            <div class="rating-grid">
-                                <label class="check-label"><input type="radio" name="cough" value="1"> Никогда</label>
-                                <label class="check-label"><input type="radio" name="cough" value="2"> Редко</label>
-                                <label class="check-label"><input type="radio" name="cough" value="3"> Иногда</label>
-                                <label class="check-label"><input type="radio" name="cough" value="4"> Часто</label>
-                                <label class="check-label"><input type="radio" name="cough" value="5"> Постоянно</label>
+                        <!-- Кашель (entry.1391285959) -->
+                         <div style="margin-bottom: 20px;">
+                            <label style="font-weight:600; color:var(--primary);">Кашель:</label>
+                            <div class="radio-group" style="margin-top:5px;">
+                                <label class="check-label"><input type="radio" name="entry.1391285959" value="Никогда"> Никогда</label>
+                                <label class="check-label"><input type="radio" name="entry.1391285959" value="Редко"> Редко</label>
+                                <label class="check-label"><input type="radio" name="entry.1391285959" value="Иногда"> Иногда</label>
+                                <label class="check-label"><input type="radio" name="entry.1391285959" value="Часто"> Часто</label>
+                                <label class="check-label"><input type="radio" name="entry.1391285959" value="Постоянно"> Постоянно</label>
                             </div>
                         </div>
 
-                        <!-- Усталость -->
-                        <div class="symptom-card">
-                            <div class="symptom-name"><i class="fa-solid fa-battery-quarter"></i> Усталость</div>
-                            <div class="rating-grid">
-                                <label class="check-label"><input type="radio" name="fatigue" value="1"> Никогда</label>
-                                <label class="check-label"><input type="radio" name="fatigue" value="2"> Редко</label>
-                                <label class="check-label"><input type="radio" name="fatigue" value="3"> Иногда</label>
-                                <label class="check-label"><input type="radio" name="fatigue" value="4"> Часто</label>
-                                <label class="check-label"><input type="radio" name="fatigue" value="5"> Постоянно</label>
+                        <!-- Усталость (entry.504353395) -->
+                         <div style="margin-bottom: 20px;">
+                            <label style="font-weight:600; color:var(--primary);">Усталость:</label>
+                            <div class="radio-group" style="margin-top:5px;">
+                                <label class="check-label"><input type="radio" name="entry.504353395" value="Никогда"> Никогда</label>
+                                <label class="check-label"><input type="radio" name="entry.504353395" value="Редко"> Редко</label>
+                                <label class="check-label"><input type="radio" name="entry.504353395" value="Иногда"> Иногда</label>
+                                <label class="check-label"><input type="radio" name="entry.504353395" value="Часто"> Часто</label>
+                                <label class="check-label"><input type="radio" name="entry.504353395" value="Постоянно"> Постоянно</label>
+                            </div>
+                        </div>
+                        
+                         <!-- Мешают ли активности (entry.1202286554) -->
+                         <div class="survey-q" style="margin-top: 30px;">
+                            <label class="main-label">Как часто симптомы мешают вашей обычной активности?</label>
+                            <div class="radio-group">
+                                <label class="check-label"><input type="radio" name="entry.1202286554" value="Практически не мешают"> Практически не мешают</label>
+                                <label class="check-label"><input type="radio" name="entry.1202286554" value="Иногда"> Иногда</label>
+                                <label class="check-label"><input type="radio" name="entry.1202286554" value="Часто"> Часто</label>
+                                <label class="check-label"><input type="radio" name="entry.1202286554" value="Очень сильно ограничивают"> Очень сильно ограничивают</label>
+                            </div>
+                        </div>
+
+                        <!-- Курение (entry.1994539905) -->
+                         <div class="survey-q">
+                            <label class="main-label">Вы курите?</label>
+                            <div class="radio-group">
+                                <label class="check-label"><input type="radio" name="entry.1994539905" value="Да"> Да</label>
+                                <label class="check-label"><input type="radio" name="entry.1994539905" value="Нет"> Нет</label>
                             </div>
                         </div>
                     </fieldset>
@@ -577,55 +882,132 @@
                         <legend>3. Активность и Реабилитация</legend>
                         <div class="survey-q">
                             <label class="main-label">Испытываете ли трудности при:</label>
-                            <div class="checkbox-grid">
-                                <label class="check-label"><input type="checkbox" name="diff_walk"> Ходьбе на 500 м</label>
-                                <label class="check-label"><input type="checkbox" name="diff_stairs"> Подъеме на 1 этаж</label>
-                                <label class="check-label"><input type="checkbox" name="diff_home"> Домашних делах</label>
+                            
+                            <!-- Ходьба (entry.1227439348) -->
+                            <div style="margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #f1f5f9; padding-bottom:5px;">
+                                <span>Ходьбе на 500 м:</span>
+                                <div>
+                                    <label style="margin-right:10px;"><input type="radio" name="entry.1227439348" value="Да"> Да</label>
+                                    <label><input type="radio" name="entry.1227439348" value="Нет"> Нет</label>
+                                </div>
+                            </div>
+
+                            <!-- Лестница (entry.1983436474) -->
+                            <div style="margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #f1f5f9; padding-bottom:5px;">
+                                <span>Подъеме на 1 этаж:</span>
+                                <div>
+                                    <label style="margin-right:10px;"><input type="radio" name="entry.1983436474" value="Да"> Да</label>
+                                    <label><input type="radio" name="entry.1983436474" value="Нет"> Нет</label>
+                                </div>
+                            </div>
+                             <!-- Дом дела (entry.987263218) -->
+                             <div style="margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #f1f5f9; padding-bottom:5px;">
+                                <span>Домашних делах:</span>
+                                <div>
+                                    <label style="margin-right:10px;"><input type="radio" name="entry.987263218" value="Да"> Да</label>
+                                    <label><input type="radio" name="entry.987263218" value="Нет"> Нет</label>
+                                </div>
                             </div>
                         </div>
+
+                        <!-- ЛФК (entry.1144183367) -->
                         <div class="survey-q">
                             <label class="main-label">Занимаетесь ли вы ЛФК сейчас?</label>
                             <div class="radio-group">
-                                <label class="check-label"><input type="radio" name="lfk_now" value="Да"> Да</label>
-                                <label class="check-label"><input type="radio" name="lfk_now" value="Нет"> Нет</label>
+                                <label class="check-label"><input type="radio" name="entry.1144183367" value="Да"> Да</label>
+                                <label class="check-label"><input type="radio" name="entry.1144183367" value="Нет"> Нет</label>
                             </div>
                         </div>
+
+                         <!-- Интересные активности (entry.86385379) -->
                         <div class="survey-q">
                             <label class="main-label">Интересные виды активности:</label>
                             <div class="checkbox-grid">
-                                <label class="check-label"><input type="checkbox" name="act"> Дыхательные упр.</label>
-                                <label class="check-label"><input type="checkbox" name="act"> Скандинавская ходьба</label>
-                                <label class="check-label"><input type="checkbox" name="act"> Йога/Стретчинг</label>
+                                <label class="check-label"><input type="checkbox" name="entry.86385379" value="Дыхательные упражнения"> Дыхательные упражнения</label>
+                                <label class="check-label"><input type="checkbox" name="entry.86385379" value="Скандинавская ходьба"> Скандинавская ходьба</label>
+                                <label class="check-label"><input type="checkbox" name="entry.86385379" value="Йога/Стретчинг"> Йога/Стретчинг</label>
+                            </div>
+                             <div style="margin-top:10px;">
+                                <input type="text" name="entry.86385379" placeholder="Другое (укажите)" class="text-input">
                             </div>
                         </div>
                     </fieldset>
 
-                    <!-- 4. Психология -->
+                    <!-- 4. Качество жизни -->
                     <fieldset>
                         <legend>4. Качество жизни</legend>
+                        
+                        <!-- Эмоц фон (entry.882939565) ШКАЛА -->
                         <div class="survey-q">
-                            <label class="main-label">Эмоциональный фон:</label>
-                            <div class="radio-group">
-                                <label class="check-label"><input type="radio" name="psy" value="Норма"> Норма</label>
-                                <label class="check-label"><input type="radio" name="psy" value="Тревога"> Тревога</label>
-                                <label class="check-label"><input type="radio" name="psy" value="Депрессия"> Депрессия</label>
+                            <label class="main-label">Эмоциональный фон (0 - норма, 10 - тревога):</label>
+                            <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-light); margin-bottom: 5px;">
+                                <span>0 (Норма)</span><span>10 (Тревога)</span>
+                            </div>
+                            <!-- Используем радио для точного маппинга Google Forms шкалы -->
+                            <div style="display:flex; justify-content: space-between;">
+                                <label style="text-align:center;"><input type="radio" name="entry.882939565" value="1"><br>1</label>
+                                <label style="text-align:center;"><input type="radio" name="entry.882939565" value="2"><br>2</label>
+                                <label style="text-align:center;"><input type="radio" name="entry.882939565" value="3"><br>3</label>
+                                <label style="text-align:center;"><input type="radio" name="entry.882939565" value="4"><br>4</label>
+                                <label style="text-align:center;"><input type="radio" name="entry.882939565" value="5"><br>5</label>
+                                <label style="text-align:center;"><input type="radio" name="entry.882939565" value="6"><br>6</label>
+                                <label style="text-align:center;"><input type="radio" name="entry.882939565" value="7"><br>7</label>
+                                <label style="text-align:center;"><input type="radio" name="entry.882939565" value="8"><br>8</label>
+                                <label style="text-align:center;"><input type="radio" name="entry.882939565" value="9"><br>9</label>
+                                <label style="text-align:center;"><input type="radio" name="entry.882939565" value="10"><br>10</label>
                             </div>
                         </div>
+
+                         <!-- Поддержка (entry.201815014) -->
+                         <div class="survey-q">
+                            <label class="main-label">Хотели бы вы получить психологическую поддержку?</label>
+                            <div class="radio-group">
+                                <label class="check-label"><input type="radio" name="entry.201815014" value="Да"> Да</label>
+                                <label class="check-label"><input type="radio" name="entry.201815014" value="Нет"> Нет</label>
+                            </div>
+                        </div>
+
+                         <!-- Влияние болезни (entry.571136071) ШКАЛА -->
                         <div class="survey-q">
-                            <label class="main-label">Оцените влияние болезни (0-10):</label>
-                            <input type="range" min="0" max="10" style="width:100%; margin: 10px 0;">
-                            <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-light);">
+                            <label class="main-label">Оцените влияние болезни (0 - Нет, 10 - Макс):</label>
+                             <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-light); margin-bottom: 5px;">
                                 <span>0 (Нет)</span><span>10 (Макс)</span>
+                            </div>
+                            <div style="display:flex; justify-content: space-between;">
+                                <label style="text-align:center;"><input type="radio" name="entry.571136071" value="1"><br>1</label>
+                                <label style="text-align:center;"><input type="radio" name="entry.571136071" value="2"><br>2</label>
+                                <label style="text-align:center;"><input type="radio" name="entry.571136071" value="3"><br>3</label>
+                                <label style="text-align:center;"><input type="radio" name="entry.571136071" value="4"><br>4</label>
+                                <label style="text-align:center;"><input type="radio" name="entry.571136071" value="5"><br>5</label>
+                                <label style="text-align:center;"><input type="radio" name="entry.571136071" value="6"><br>6</label>
+                                <label style="text-align:center;"><input type="radio" name="entry.571136071" value="7"><br>7</label>
+                                <label style="text-align:center;"><input type="radio" name="entry.571136071" value="8"><br>8</label>
+                                <label style="text-align:center;"><input type="radio" name="entry.571136071" value="9"><br>9</label>
+                                <label style="text-align:center;"><input type="radio" name="entry.571136071" value="10"><br>10</label>
                             </div>
                         </div>
                     </fieldset>
 
                     <!-- 5. О ресурсе -->
                     <fieldset>
-                        <legend>5. О ресурсе</legend>
+                        <legend>5. Ожидания от ресурса</legend>
+                        
+                        <!-- Чего не хватает (entry.1052492061) -->
+                        <div class="survey-q">
+                            <label class="main-label">Какой информации вам не хватает?</label>
+                             <div class="checkbox-grid">
+                                <label class="check-label"><input type="checkbox" name="entry.1052492061" value="О болезни и ее течении"> О болезни и ее течении</label>
+                                <label class="check-label"><input type="checkbox" name="entry.1052492061" value="О методах лечения"> О методах лечения</label>
+                                <label class="check-label"><input type="checkbox" name="entry.1052492061" value="О физических нагрузках"> О физических нагрузках</label>
+                                <label class="check-label"><input type="checkbox" name="entry.1052492061" value="О питании"> О питании</label>
+                                <label class="check-label"><input type="checkbox" name="entry.1052492061" value="О психологической поддержке"> О психологической поддержке</label>
+                            </div>
+                        </div>
+
+                        <!-- Предложения (entry.1168927692) -->
                         <div class="survey-q">
                             <label class="main-label">Ваши предложения:</label>
-                            <textarea style="width:100%; height:80px; padding:10px; border-radius:8px; border:1px solid #cbd5e1; font-family: inherit;"></textarea>
+                            <textarea name="entry.1168927692" style="width:100%; height:80px; padding:10px; border-radius:8px; border:1px solid #cbd5e1; font-family: inherit;"></textarea>
                         </div>
                     </fieldset>
 
@@ -633,6 +1015,38 @@
                         <button type="submit" class="btn-primary">Отправить данные</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- КОНТАКТЫ -->
+    <section id="feedback">
+        <div class="container">
+            <div class="section-title">
+                <h2>Контакты</h2>
+                <p>Если у вас возникли вопросы.</p>
+            </div>
+            
+            <div class="glass-card contact-card" data-aos="zoom-in">
+                <div class="contact-header">Остринская Екатерина Александровна</div>
+                <div class="contact-role">Специалист по адаптивной физической культуре с медицинским образованием</div>
+                
+                <div class="contact-links">
+                    <a href="https://wa.me/79104687001" class="contact-item">
+                        <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i>
+                        <span>WhatsApp: 8 (910) 468-70-01</span>
+                    </a>
+                    
+                    <a href="https://t.me/ostrinskayakatya" class="contact-item">
+                        <i class="fa-brands fa-telegram" style="color: #229ED9;"></i>
+                        <span>Telegram: @ostrinskayakatya</span>
+                    </a>
+                    
+                    <a href="mailto:f89104687001@yandex.ru" class="contact-item">
+                        <i class="fa-solid fa-envelope" style="color: var(--primary);"></i>
+                        <span>f89104687001@yandex.ru</span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -649,10 +1063,23 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 800, once: true });
-        document.getElementById('surveyForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Спасибо! Ваши ответы сохранены (демо-режим).');
-        });
+        
+        // Скрипт для отправки формы в Google Forms
+        var submitted = false;
+
+        // Скрипт для раскрытия упражнений
+        function toggleEx(btn) {
+            const content = btn.nextElementSibling;
+            const isHidden = getComputedStyle(content).display === 'none';
+            content.style.display = isHidden ? 'block' : 'none';
+            btn.innerHTML = isHidden ? 'Скрыть технику выполнения <i class="fa-solid fa-chevron-up"></i>' : 'Показать технику выполнения <i class="fa-solid fa-chevron-down"></i>';
+        }
+
+        // Скрипт для Аккордеона (Самоконтроль)
+        function toggleAcc(header) {
+            const item = header.parentElement;
+            item.classList.toggle('active');
+        }
     </script>
 </body>
 </html>
